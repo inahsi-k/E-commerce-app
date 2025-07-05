@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-//individual varint 
+//individual variant 
 //name-- red, XL respectively
 const variantSchema = new mongoose.Schema({
     name: {
