@@ -1,8 +1,6 @@
 import 'dart:io';
-import 'package:e_commerce_admin_panel/utils/contants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class CategoryPhotoCard extends StatelessWidget {
   final String labelText;

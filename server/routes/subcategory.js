@@ -36,7 +36,7 @@ router.post('/', asyncHandler(async (req, res) => {
     }
     try {
         const subCategory = new SubCategory({ name, categoryId }); //returns wont show v timestamps and not yet saved in db, id not passed to db
-        const newSubCategory = await subCategory.save(); // returns full data 
+        const newSubCategory = await subCategory.save(); // returns full data with created at ,updated at
         res.json({ success: true, message: "Sub-category created successfully.", data:newSubCategory });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
