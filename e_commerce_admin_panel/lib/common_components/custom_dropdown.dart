@@ -12,17 +12,31 @@ class CustomDropdown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  DropdownButtonFormField<T>(
+      isExpanded: true,
+      hint: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          hintText,
+          overflow: TextOverflow.ellipsis,
+          softWrap: false,
+          maxLines: 1,
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       decoration: InputDecoration(
-        labelText: hintText,
-        labelStyle:TextStyle(color: Colors.white),
-        hintText: hintText,
-        hintStyle: TextStyle(color: Colors.white),
+        // hintText: 
+        // hintStyle: TextStyle(color: Colors.white,overflow: TextOverflow.ellipsis),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
         )
       ),
       value: initialValue,
-      items: items.map((T item)=>DropdownMenuItem(value:item,child: Text(displayItem(item)))).toList(),
+      items: items.map((T item)=>DropdownMenuItem(
+        value:item,
+        child: Text(displayItem(item),
+        overflow: TextOverflow.ellipsis,
+        softWrap: false,
+        maxLines: 1,))).toList(),
       onChanged:onChanged ,
       validator: validator,
     );

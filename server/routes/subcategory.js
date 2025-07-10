@@ -9,10 +9,10 @@ const asyncHandler = require('express-async-handler');
 
 router.get('/',asyncHandler(async(req,res)=>{
     try{
-        const subCategories = await Category.find().populate('categoryId').sort({'categoryId': 1}); // sorts the sub-categories by their categoryId in ascending order (1 = ascending, -1 = descending).
+        const subCategories = await SubCategory.find().populate('categoryId').sort({'categoryId': 1}); // sorts the sub-categories by their categoryId in ascending order (1 = ascending, -1 = descending).
         res.json({ success: true, message: "SubCategories retrieved successfully.", data: subCategories });
     }catch(err){
-        res.status(500).json({ success: false, message: error.message });
+        res.status(500).json({ success: false, message: err.message });
     }
 }));
 

@@ -2,22 +2,22 @@ import 'package:e_commerce_admin_panel/common_components/custom_dropdown.dart';
 import 'package:e_commerce_admin_panel/common_components/custom_text.dart';
 import 'package:e_commerce_admin_panel/common_components/custom_textformfield.dart';
 import 'package:e_commerce_admin_panel/core/data/data_provider.dart';
-import 'package:e_commerce_admin_panel/models/category.dart';
+import 'package:e_commerce_admin_panel/models/brand.dart';
 import 'package:e_commerce_admin_panel/models/sub_category.dart';
-import 'package:e_commerce_admin_panel/screens/sub_category/provider/sub_category_provider.dart';
+import 'package:e_commerce_admin_panel/screens/brand/provider/brand_provider.dart';
 import 'package:e_commerce_admin_panel/utils/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SubCategoryForm extends StatelessWidget {
-  final SubCategory? subCategory;
-  const SubCategoryForm({super.key, this.subCategory});
+class BrandForm extends StatelessWidget {
+  final Brand? brand;
+  const BrandForm({super.key, this.brand});
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Form(
-        key: Provider.of<SubCategoryProvider>(context).addSubCategoryFormKey,
+        key: Provider.of<BrandProvider>(context).addBrandFormKey,
         child: Container(
           width: size.width * 0.4,
           decoration: BoxDecoration(
@@ -32,26 +32,26 @@ class SubCategoryForm extends StatelessWidget {
                   children: [
                     Flexible(
                       flex: 1,
-                      child: Consumer<SubCategoryProvider>(
+                      child: Consumer<BrandProvider>(
                         builder: (context, provider, child) {
                           return CustomDropdown(
-                            initialValue: provider.selectedCategory,
+                            initialValue: provider.selectedSubCategory,
                             hintText:
-                                provider.selectedCategory?.name ??
-                                'Select category',
+                                provider.selectedSubCategory?.name ??
+                                'Select Sub Category',
                             onChanged: (value) {
                               if (value != null) {
-                                provider.selectedCategory = value;
+                                provider.selectedSubCategory = value;
                                 provider.notifyListeners();
                               }
                             },
                             items:
-                                Provider.of<DataProvider>(context).categories,
+                                Provider.of<DataProvider>(context).subCategories,
                             displayItem:
-                                (Category? category) => category?.name ?? '',
+                                (SubCategory? subCategory) => subCategory?.name ?? '',
                             validator: (value) {
                               if (value == null) {
-                                return 'Please select a category';
+                                return 'Please select a Sub Category';
                               }
                               return null;
                             },
@@ -65,17 +65,17 @@ class SubCategoryForm extends StatelessWidget {
                     Flexible(
                       flex: 1,
                       child: CustomTextformfield(
-                        hintText: "Sub Category Name",
+                        hintText: "Sub Brand Name",
                         controller:
-                            Provider.of<SubCategoryProvider>(
+                            Provider.of<BrandProvider>(
                               context,
-                            ).subCategoryNameController,
+                            ).brandNameController,
                         inputType: TextInputType.text,
                         lines: 1,
                         onSave: (value) {},
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter a sub category name';
+                            return 'Please enter a brand name';
                           }
                           return null;
                         },
@@ -103,12 +103,12 @@ class SubCategoryForm extends StatelessWidget {
                         backgroundColor: componentColors,
                       ),
                       onPressed: () {
-                        if (Provider.of<SubCategoryProvider>(
+                        if (Provider.of<BrandProvider>(
                           context,
-                        ).addSubCategoryFormKey.currentState!.validate()) {
-                          Provider.of<SubCategoryProvider>(
+                        ).addBrandFormKey.currentState!.validate()) {
+                          Provider.of<BrandProvider>(
                             context,
-                          ).addSubCategoryFormKey.currentState!.save();
+                          ).addBrandFormKey.currentState!.save();
                           Navigator.of(context).pop();
                         }
                       },
@@ -125,7 +125,7 @@ class SubCategoryForm extends StatelessWidget {
   }
 }
 
-void showAddSubCategoryForm(BuildContext context, SubCategory? subCategory) {
+void showAddBrandForm(BuildContext context, Brand? brand) {
   showDialog(
     barrierColor: Colors.black45,
     context: context,
@@ -137,12 +137,12 @@ void showAddSubCategoryForm(BuildContext context, SubCategory? subCategory) {
         ),
         backgroundColor: componentColors,
         title: CustomText(
-          text: "Add Category",
+          text: "Add Brand",
           size: 17,
           color: Colors.white,
           weight: FontWeight.normal,
         ),
-        content: SingleChildScrollView(child: SubCategoryForm(subCategory: subCategory)),
+        content: SingleChildScrollView(child: BrandForm(brand: brand)),
       );
     },
   );

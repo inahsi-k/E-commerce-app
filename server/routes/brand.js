@@ -27,7 +27,8 @@ router.get('/:id', asyncHandler(async (req, res) => {
 }));
 
 router.post('/', asyncHandler(async (req, res) => {
-    const { name, subcategoryId } = req.body;
+    console.log(req.body);
+    const { name , subcategoryId } = req.body;
     if (!name || !subcategoryId) {
         return res.status(400).json({ success: false, message: "Name and subcategory ID are required." });
     }

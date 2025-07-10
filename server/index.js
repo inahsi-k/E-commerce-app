@@ -11,6 +11,9 @@ const PORT=3000;
 const app = express();
 
 app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 
 //static routes
 app.use('/image/products', express.static('public/products'));
@@ -21,5 +24,7 @@ app.use('/image/poster', express.static('public/posters'));
 app.use('/categories', require('./routes/category'));
 app.use('/subCategories', require('./routes/subcategory'));
 app.use('/brands', require('./routes/brand'));
+//app.use('/products', require('./routes/product'));
+
 
 app.listen(PORT,(req,res)=>console.log("Server started"));

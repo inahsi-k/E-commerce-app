@@ -1,3 +1,4 @@
+import 'package:e_commerce_admin_panel/models/brand.dart';
 import 'package:e_commerce_admin_panel/models/category.dart';
 import 'package:e_commerce_admin_panel/models/sub_category.dart';
 import 'package:e_commerce_admin_panel/services/api_services.dart';
@@ -13,5 +14,9 @@ class DataProvider extends ChangeNotifier {
   final List<SubCategory> _subCategories = [];
   final List<SubCategory> _filteredSubCategories = [];
   List<SubCategory> get subCategories => _filteredSubCategories;
+  
+  final List<Brand> _brands = [];
+  final List<Brand> _filteredBrands = [];
+  List<Brand> get brands => _filteredBrands;
   
 }
